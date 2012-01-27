@@ -1,0 +1,36 @@
+{
+	"name" : "Bofirial",
+	"description" : "A Simple Web Gaming Engine",
+	"version" : "0.0.1",
+	"homepage" : "",
+	"author" : "James Schafer <james@jschafer.net",
+	"contributors" : [
+		{
+			"name" : "James Schafer",
+			"email" :  "<james@jschafer.net"
+		}
+	],
+	"repository" : {
+		"type" :"git",
+		"url": "https://github.com/bofirial/Bofirial"
+	},
+	"bugs" :
+	{
+		"mail" : "james@jschafer.net"
+	},
+	"main" : "main.js",
+	"engine" : 
+	{
+		"node" : ">=0.6.5" 
+	},	
+	"dependencies" :
+	{
+		"colors" : "*",
+		"socket.io" : "0.8.x",
+		"express" : "2.5.x",
+		"jade" : "0.20.x",
+		"mongoose" : "2.4.x",
+		"everyauth" : "0.2.x"
+	},
+	"license" : "MIT"
+}
