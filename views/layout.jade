@@ -1,9 +1,24 @@
 !!! 5
 html
   head
-    title= typeof(title) !== 'undefined' ? title : "everyauth example"
+    title= typeof(title) !== 'undefined' ? title : "Bofirial"
+    link(rel="stylesheet", type="text/css", href="/stylesheets/main.css")
+    
   body
-    h1 everyauth Example
+    .header
+      h1 Bofirial
+      ul
+        li
+          a(href='javascript:void()') New Game
+        li
+          a(href='javascript:void()') High Scores
+          
+      - if (everyauth.loggedIn)
+        a(href='javascript:void()')= everyauth.user.fullName
+        a(href='/logout') Logout
+      - else
+        a(href='/auth/google') Sign In
+  
     #main
       != body
 

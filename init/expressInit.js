@@ -23,7 +23,7 @@ module.exports.init = function(database) {
 				if (docs.length > 0)
 				{
 					user = docs[0];
-					console.log('User: ' + user.fullName + ' logged in!'.info);
+					console.log(('User: ' + user.fullName + ' logged in!').connection);
 				} else {
 					user.firstName = googleUserMetadata.given_name;
 					user.lastName = googleUserMetadata.family_name;
@@ -33,17 +33,31 @@ module.exports.init = function(database) {
 					user.id = googleUserMetadata.id;
 					
 					user.save(function (err) {
-						console.log('New User: ' + user.fullName + ' saved!'.info);
+						console.log(('New User: ' + user.fullName + ' saved!').connection);
 					});
 				}
 				
 				promise.fulfill(user);
-			})
+			});
 			
 			return promise;
 			
 		})
 		.redirectPath('/');
+		
+	everyauth.everymodule.findUserById( function (userId, callback) {
+		  var user = new schemas.User();
+			
+			schemas.User.find({id: userId}, function (err, docs) {
+				if (docs && docs.length > 0)
+				{
+					user = docs[0];
+					console.log(('User: ' + user.fullName + ' logged in!').connection);
+				}
+				
+				callback(null, user);
+			});
+		});
 	
 	app.configure(function() {
 		app.use(express.static(__dirname + '/../public'));
