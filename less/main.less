@@ -1,0 +1,203 @@
+@import "mixins/elements.less";
+
+@headerColor: #222;
+@headerFontColor: #bbb;
+
+@bgColor: #300;
+
+@navColor: #611;
+
+@chatBoxColor: #999;
+
+html, body {
+	min-height: 100%
+}
+
+body {
+	.gradient(@bgColor, lighten(@bgColor, 10%), @bgColor);
+}
+
+div {
+	box-sizing: border-box;
+}
+
+#main {
+	min-height:100%;
+	max-width: 1300px;
+	margin: -58px auto 0;
+	padding-top: 58px;
+}
+
+.headerWrapper {
+	
+	height: 58px;
+	.gradient(@headerColor, @headerColor, lighten(@headerColor, 10%));
+	//.rounded(10px);
+	
+	border-bottom: 3px darken(@headerColor, 10%) solid;
+	
+	.header {
+		max-width: 1300px;
+		margin: auto;
+		position: relative;
+	
+		h1 {
+			font: bold 32px mono;
+			margin: 0;
+			padding: 10px 20px;
+			color: @headerFontColor;
+			display: inline-block;
+		}
+	
+		ul {
+			list-style: none;
+			position: absolute;
+			display: inline-block;
+			margin: 0;
+			padding: 0 0 0 20px;
+		
+			li {
+				display: inline-block;
+				height: 19px;
+				margin: 10px;
+				padding: 8px 16px;
+				width: 100px;
+				text-align: center;
+				.gradient(@navColor, darken(@navColor, 10%), @navColor);
+				.rounded(10px);
+				.box-shadow(1px 1px 3px rgba(0, 0, 0, 0.4));
+			
+				a {
+					display: inline-block;
+					margin: -8px -16px;
+					padding: 8px 16px;
+					text-decoration: none;
+					width: 100px;
+					color: @headerFontColor;
+				}
+			}
+					
+			li.current {
+				.gradient(@navColor, lighten(@navColor, 5%), darken(@navColor, 5%));
+				font-weight: bold;
+			}
+		
+			li:hover {
+				.gradient(@navColor, @navColor, lighten(@navColor, 10%));
+			}
+		}	
+	
+		.userNav {
+			position: absolute;
+			right: 0;
+			top: 10px;
+		
+			label {
+				color: @headerFontColor;
+				font-weight: bold;
+			}
+		
+			a {
+				padding: 0 20px 0 10px;
+				color: @headerFontColor;
+			}
+		}
+	}
+}
+
+.chatBox {
+
+	width: 1000px;
+	height: 300px;
+	
+	margin: 30px auto;
+	
+	.chatLog {
+		width: 980px;
+		margin: 10px auto;
+		height: 240px;
+		border: 5px #000 solid;
+		
+		.gradient(@chatBoxColor, @chatBoxColor, darken(@chatBoxColor, 20%));
+		.rounded(10px);
+			.box-shadow(5px 5px 10px rgba(0, 0, 0, 0.4));
+		
+		overflow: auto;
+		
+		list-style: none;
+		padding: 5px 15px;
+		
+		li {
+			
+			padding: 2px;
+			
+			.name {
+				color: blue;
+				font-weight: bold;
+			}
+			
+			.self {
+				color: red;
+				font-weight: bold;
+			}
+		}
+		
+		li.newUser {
+			opacity: .5;
+		}
+	}
+	
+	.inputGroup {
+		
+		width: 100%;
+		margin: 0 0 10px;
+		padding: 0 30px;
+		
+		input[type="text"] {
+			width: 780px;
+		}
+		
+		.button {
+			display: inline-block;
+			color: #000;
+			text-align: center;
+			text-decoration: none;
+			.gradient(@chatBoxColor, @chatBoxColor, darken(@chatBoxColor, 20%));
+			.rounded(4px);
+			.box-shadow(1px 1px 3px rgba(0, 0, 0, 0.4));
+			min-width: 70px;
+			padding: 6px 15px;
+			margin: 0 0 0 30px;
+		}
+		
+		.button:hover {
+			.gradient(@chatBoxColor, darken(@chatBoxColor, 20%), darken(@chatBoxColor, 30%));
+			color: #fff;
+		}
+		
+	}
+}
+
+@media only screen and (min-width: 480px) {
+	.header {
+	
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.header {
+	
+	}
+}
+
+@media only screen and (min-width: 960px) {
+	.header {
+	
+	}
+}
+
+@media only screen and (min-width: 1300px) {
+	.header {
+	
+	}
+}

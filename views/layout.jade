@@ -2,22 +2,42 @@
 html
   head
     title= typeof(title) !== 'undefined' ? title : "Bofirial"
+    link(rel="stylesheet", type="text/css", href="/stylesheets/normalize.css")
     link(rel="stylesheet", type="text/css", href="/stylesheets/main.css")
     
+    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js")(type="text/javascript")
+    script(src="/socket.io/socket.io.js")(type="text/javascript")
+    script(src="/scripts/bofirial.js")(type="text/javascript")
+
   body
-    .header
-      h1 Bofirial
-      ul
-        li
-          a(href='javascript:void()') New Game
-        li
-          a(href='javascript:void()') High Scores
+    .headerWrapper
+      .header(data-username= (everyauth.loggedIn? everyauth.user.firstName : undefined))
+        h1 Bofirial
+        ul
+          -var cur = "";
+          -if (currentNav==="Home")
+            cur = "current";
+          li(class=cur)
+            a(href='/') Home
           
-      - if (everyauth.loggedIn)
-        a(href='javascript:void()')= everyauth.user.fullName
-        a(href='/logout') Logout
-      - else
-        a(href='/auth/google') Sign In
+          -cur="";
+          -if (currentNav==="NewGame")
+            cur = "current";
+          li(class=cur)
+            a(href='/newgame') New Game
+           
+          -cur="";
+          -if (currentNav==="HighScores")
+            cur = "current";
+          li(class=cur)
+            a(href='javascript:void()') High Scores
+       
+        div(class='userNav')
+          - if (everyauth.loggedIn)
+            label= everyauth.user.fullName
+            a(href='/logout') Logout
+          - else
+            a(href='/auth/google') Sign In
   
     #main
       != body

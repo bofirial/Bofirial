@@ -1,5 +1,7 @@
 var express = require('express'),
+	MemoryStore = express.session.MemoryStore,
 	app = express.createServer(),
+	sessionStore = new MemoryStore(),
 	schemas = null;
 	
 var everyauth = require('everyauth');
@@ -37,6 +39,8 @@ module.exports.init = function(database) {
 					});
 				}
 				
+				session.user = user;
+				
 				promise.fulfill(user);
 			});
 			
@@ -52,7 +56,6 @@ module.exports.init = function(database) {
 				if (docs && docs.length > 0)
 				{
 					user = docs[0];
-					console.log(('User: ' + user.fullName + ' logged in!').connection);
 				}
 				
 				callback(null, user);
@@ -63,7 +66,11 @@ module.exports.init = function(database) {
 		app.use(express.static(__dirname + '/../public'));
 		app.use(express.bodyParser());
 		app.use(express.cookieParser());
-		app.use(express.session({secret: "abcdefgh"}));
+		app.use(express.session({
+			store: sessionStore,
+			secret: "abcdefgh",
+			key: 'express.sid'
+			}));
 		app.use(express.errorHandler());
 		
 		app.use(everyauth.middleware());
@@ -78,3 +85,5 @@ module.exports.init = function(database) {
 	
 	return app;
 };
+
+module.exports.sessionStore = sessionStore;
