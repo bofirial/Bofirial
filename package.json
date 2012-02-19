@@ -30,7 +30,8 @@
 		"express" : "2.5.x",
 		"jade" : "0.20.x",
 		"mongoose" : "2.4.x",
-		"everyauth" : "0.2.x"
+		"everyauth" : "0.2.x",
+		"connect" : "1.8.x"
 	},
 	"license" : "MIT"
 }
