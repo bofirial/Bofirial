@@ -1,5 +1,21 @@
 var socket = io.connect('http://localhost');
 
+$.fn.toggleOpenClass = function() {
+
+	$(this).toggleClass('open', 1000);
+}
+
+$(document).ready(function() {
+	$('.headerWrapper + .expandBar').click(function(e) {
+		$('.headerWrapper').toggleOpenClass();
+	});
+	
+	$('.openGames a').click(function (e) {
+		$(this).closest('li').toggleOpenClass();
+	});
+});
+
+
 function markupUserName(name) {
 	var cls = "name";
 	

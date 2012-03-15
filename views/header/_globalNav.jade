@@ -1,0 +1,20 @@
+
+
+ul.globalNav
+  -var cur = "";
+  -if (currentNav==="Home")
+    cur = "current";
+  li(class=cur).home
+    a(href='/') Home
+  
+  -cur="";
+  -if (currentNav==="NewGame")
+    cur = "current";
+  li(class=cur)
+    a(href='/newgame') New Game
+   
+  -cur="";
+  -if (currentNav==="HighScores")
+    cur = "current";
+  li(class=cur)
+    a(href='javascript:void(0)') High Scores

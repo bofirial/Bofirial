@@ -1,6 +1,19 @@
 
--if (everyauth.loggedIn)
-	h2 Select Type of Game
--else
-	h2 Log In to Create a New Game
-			
+ul.sectionList
+  li.newGame
+  
+    h2 New Game
+  
+    form
+      .formField
+        label(for='game_private') Private Game
+        input(type='checkbox', id='game_private', 'name='game[private]', checked=true)
+        
+      .formField
+        label(for='game_type') Game
+        select(id='game_type', name='game[type]')
+          option(value=1, selected=true) Tic Tac Toe
+
+      .formField
+        label(for='game_name') Game Name
+        input(type='text', id='game_name', 'name='game[name]')

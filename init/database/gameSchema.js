@@ -1,18 +1,18 @@
 
 module.exports = function(database) { 
 
-	var UserSchema = new database.Schema(
+	var GameSchema = new database.Schema(
 		{
 			firstName: String,
 			lastName: String,
 			fullName: String,
 			email: String,
-			id: { type: Number, unique: true },
+			id: Number,
 			verifiedEmail: Boolean,
 			registeredOn: {type: Date, default: Date.now}
 		});
 
-	database.model('User', UserSchema);
+	database.model('Game', GameSchema);
 	
-	return database.model('User');
+	return database.model('Game');
 };

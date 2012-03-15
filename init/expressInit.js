@@ -26,6 +26,8 @@ module.exports.init = function(database) {
 				{
 					user = docs[0];
 					console.log(('User: ' + user.fullName + ' logged in!').connection);
+					
+					//CONSIDER: Might want to update user data if its changed.
 				} else {
 					user.firstName = googleUserMetadata.given_name;
 					user.lastName = googleUserMetadata.family_name;

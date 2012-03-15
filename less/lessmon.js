@@ -12,13 +12,16 @@ fs.readdir('./', function(err, files) {
 		//Compiles and Creates a Watch for each Less File
 		if (files[i].match(/.*\.less/))
 		{
-			console.log("\t" + files[i]);
+			//Closure to store FileName for the Callback.
+			(function(lessFileName){
+				console.log("\t" + lessFileName);
 			
-			compileLess(files[i]);
-			
-			fs.watchFile(files[i], function(curr, prev) {
-				compileLess(files[i]);
-			});
+				compileLess(lessFileName);
+				
+				fs.watchFile(lessFileName, function(curr, prev) {
+					compileLess(lessFileName);
+				});
+			})(files[i]);
 		}
 	}
 	console.log("");
@@ -29,9 +32,9 @@ function compileLess(fileName)
 {
 	fs.readFile(fileName, "utf-8", function(err, data) {
 	
-		var cssFileName = fileName.substr(0, fileName.lastIndexOf('.')) || inputcssFile,
+		var cssFileName = fileName.substr(0, fileName.lastIndexOf('.')),
 			cssFilePath = "../public/stylesheets/" + cssFileName + '.css';
-		
+			
 		less.render(data, function(err, cssData) {
 		
 			fs.writeFile(cssFilePath, cssData, function(err)

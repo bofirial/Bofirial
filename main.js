@@ -16,6 +16,8 @@ app.get('/newgame', function(req, res) {
 	}});
 });
 
+
+
 io.sockets.on('connection', function (socket) {
 	var session = socket.handshake.session;
 
