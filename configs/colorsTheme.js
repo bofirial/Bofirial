@@ -1,4 +1,4 @@
-module['exports'] = {
+module.exports = {
 	connection: 'green',
 	
 	info: 'grey',
