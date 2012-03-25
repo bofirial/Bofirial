@@ -2,14 +2,12 @@ var express = require('express'),
 	MemoryStore = express.session.MemoryStore,
 	app = express.createServer(),
 	sessionStore = new MemoryStore(),
-	schemas = null;
-	
-var everyauth = require('everyauth');
+	everyauth = require('everyauth');
 
-module.exports.init = function(database) {
+//Initializes Express
+module.exports.init = function(dal) {
 	
-	schemas = require('./schemas.js')(database);
-	
+	//Google Login Handling
 	everyauth.google
 		.appId('1089135435768.apps.googleusercontent.com')
 		.appSecret('SPh1akml61UxCKtwEkCywTNR')
@@ -17,18 +15,24 @@ module.exports.init = function(database) {
 		.handleAuthCallbackError( function(req, res) {
 			console.log('handleAuthCallbackError');
 		})
+		//Builds the User Object after Google Login
 		.findOrCreateUser( function(session, accessToken, accessTokenExtra, googleUserMetadata) {
 			var promise = this.Promise(),
-				user = new schemas.User();
+				user;
 			
-			schemas.User.find({id: googleUserMetadata.id}, function (err, docs) {
+			//Selects the User from the Database
+			dal.User.selectById(googleUserMetadata.id, function (err, docs) {
 				if (docs.length > 0)
 				{
+					//CONSIDER: Might want to update user data if its changed.
+					
 					user = docs[0];
+					
 					console.log(('User: ' + user.fullName + ' logged in!').connection);
 					
-					//CONSIDER: Might want to update user data if its changed.
 				} else {
+					//Inserts the New User into the Database
+				
 					user.firstName = googleUserMetadata.given_name;
 					user.lastName = googleUserMetadata.family_name;
 					user.fullName = googleUserMetadata.name;
@@ -36,7 +40,7 @@ module.exports.init = function(database) {
 					user.verifiedEmail = googleUserMetadata.verified_email;
 					user.id = googleUserMetadata.id;
 					
-					user.save(function (err) {
+					dal.User.insert(user, function (err) {
 						console.log(('New User: ' + user.fullName + ' saved!').connection);
 					});
 				}
@@ -50,11 +54,13 @@ module.exports.init = function(database) {
 			
 		})
 		.redirectPath('/');
-		
+	
+	//Builds the User Object from the userId
 	everyauth.everymodule.findUserById( function (userId, callback) {
-		  var user = new schemas.User();
+		  var user;
 			
-			schemas.User.find({id: userId}, function (err, docs) {
+			//Selects the User from the Database
+			dal.User.selectById(userId, function (err, docs) {
 				if (docs && docs.length > 0)
 				{
 					user = docs[0];
@@ -64,6 +70,7 @@ module.exports.init = function(database) {
 			});
 		});
 	
+	//Express Settings
 	app.configure(function() {
 		app.use(express.static(__dirname + '/../public'));
 		app.use(express.bodyParser());

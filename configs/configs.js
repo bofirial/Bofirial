@@ -1,5 +1,6 @@
 var environment = require('./environment.js'),
-	
+
+	//Configuration Settings
 	configs = {
 		
 		databaseConnection: {

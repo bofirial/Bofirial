@@ -4,16 +4,12 @@ ul.sectionList
   
     h2 New Game
   
-    form
-      .formField
-        label(for='game_private') Private Game
-        input(type='checkbox', id='game_private', 'name='game[private]', checked=true)
+    form(action="/newgame", method="POST")
         
-      .formField
-        label(for='game_type') Game
-        select(id='game_type', name='game[type]')
-          option(value=1, selected=true) Tic Tac Toe
+      != partial('helpers/checkbox', {label: 'Private Game', name: 'game[private]', def: true})
 
-      .formField
-        label(for='game_name') Game Name
-        input(type='text', id='game_name', 'name='game[name]')
+      != partial('helpers/dropdown', {model: types.gameTypes, name: 'game[type]', def: types.gameTypes.ticTacToe.value, label: "Game"});
+        
+      != partial('helpers/textbox', {label: 'Game Name', name: 'game[name]', def: ""})
+      
+      != partial('helpers/submit', {label: "Create Game"})

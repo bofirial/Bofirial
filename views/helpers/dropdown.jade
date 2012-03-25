@@ -1,0 +1,17 @@
+//- DropDown Helper
+
+id = convertNameToId(name)
+selected = true
+
+.formField
+    label(for= id)= label
+    select(id= id, name= name)
+    
+      each item, key in model
+        selected = "";
+        
+        if (item.value == def)
+            selected = true;
+            
+        option(value= item.value, selected= selected)= item.name
+

@@ -1,8 +1,36 @@
 var colorThemes = require('./init/colorsInit.js').init(),
-	database = require('./init/dbInit.js').init(),
+	dal = require('./DAL/DAL.js'),
 	expressInit = require('./init/expressInit.js'),
-	app = expressInit.init(database),
-	io = require('./init/socketioInit.js').init(app, expressInit.sessionStore);
+	app = expressInit.init(dal),
+	io = require('./init/socketioInit.js').init(app, expressInit.sessionStore),
+	types = require('./configs/types.js');
+	
+//Globals for all Views
+app.dynamicHelpers({
+	//Types
+	types: function(req, res) {
+		return types;
+	},
+	//Function to convert an input Name to a jQuery compatible Id
+	convertNameToId: function(req, res) {
+		return function(name) {
+			var charConversions = {},
+				id = name;
+			
+			charConversions['['] = '_';
+			charConversions[']'] = '';
+			charConversions[':'] = '';
+			charConversions['.'] = '_';
+			
+			for (char in charConversions)
+			{
+				id = id.replace(char, charConversions[char]);
+			}
+		
+			return id;
+		};
+	}
+});
 
 app.get('/', function(req, res) {
 	res.render('root', {locals: {
@@ -11,12 +39,18 @@ app.get('/', function(req, res) {
 });
 
 app.get('/newgame', function(req, res) {
+
 	res.render('newgame', {locals: {
 		currentNav: "NewGame"
 	}});
 });
 
+app.post('/newgame', function(req, res) {
 
+	res.render('newgame', {locals: {
+		currentNav: "NewGame"
+	}});
+});
 
 io.sockets.on('connection', function (socket) {
 	var session = socket.handshake.session;

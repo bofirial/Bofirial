@@ -1,9 +1,11 @@
-
+//Initialize Socket.Io
 exports.init = function(app, sessionStore) {
 	var io = require('socket.io').listen(app);
 
+	//Turns off Handshake Logging
 	io.set('log level', 2);
 
+//Session Handling for Express
 	var parseCookie = require('connect').utils.parseCookie;
 	 
 	io.set('authorization', function (data, accept) {
