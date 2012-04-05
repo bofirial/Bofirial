@@ -22,6 +22,10 @@ module.exports = {
 			
 			userSchema.save(callback);
 		}
+	},
+	
+	GameLobby: {
+		
 	}
 
 };
