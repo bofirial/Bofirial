@@ -18,7 +18,7 @@ module.exports.init = function(dal) {
 		//Builds the User Object after Google Login
 		.findOrCreateUser( function(session, accessToken, accessTokenExtra, googleUserMetadata) {
 			var promise = this.Promise(),
-				user;
+				user = {};
 			
 			//Selects the User from the Database
 			dal.User.selectById(googleUserMetadata.id, function (err, docs) {

@@ -14,6 +14,7 @@ app.dynamicHelpers({
 	//Function to convert an input Name to a jQuery compatible Id
 	convertNameToId: function(req, res) {
 		return function(name) {
+            
 			var charConversions = {},
 				id = name;
 			
@@ -22,7 +23,7 @@ app.dynamicHelpers({
 			charConversions[':'] = '';
 			charConversions['.'] = '_';
 			
-			for (char in charConversions)
+			for (var char in charConversions)
 			{
 				id = id.replace(char, charConversions[char]);
 			}
@@ -78,4 +79,4 @@ io.sockets.on('connection', function (socket) {
   });
 });
 
-app.listen(80);
+app.listen(process.env.PORT);
