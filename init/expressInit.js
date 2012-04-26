@@ -5,7 +5,7 @@ var express = require('express'),
 	everyauth = require('everyauth');
 
 //Initializes Express
-module.exports.init = function(dal) {
+exports.init = function(dal) {
 	
 	//Google Login Handling
 	everyauth.google
@@ -95,4 +95,4 @@ module.exports.init = function(dal) {
 	return app;
 };
 
-module.exports.sessionStore = sessionStore;
+exports.sessionStore = sessionStore;
