@@ -15,9 +15,9 @@ $(document).ready(function() {
 	});
 });
 
-now.ready(function() {
-    now.logStuff("Test Message");
-});
+//now.ready(function() {
+//    now.logStuff("Test Message");
+//});
 
 //function markupUserName(name) {
 //	var cls = "name";

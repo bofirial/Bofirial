@@ -1,12 +1,22 @@
 var database = require('./dbInit.js').init(),
 	schemas = require('./schemas.js')(database);
 
-module.exports = {
+global.dal = {
 	//User Database Access
 	User: {
 		//Selects a User By it's Google Id
-		selectById: function(userId, callback) {
-			schemas.User.find({id: userId}, callback);
+		selectById: function(googleId, everyAuthType, callback) {
+		
+			schemas.User.findOne({id: googleId}, function (err, docs) {
+			
+				if (docs.length > 0)
+				{
+					//CONSIDER: Might want to update user data if its changed.
+				
+					callback.call(null, docs[0]);
+				}
+
+			});
 		},
 		
 		//Inserts a new User
@@ -21,6 +31,13 @@ module.exports = {
 			userSchema.id = 			user.id;
 			
 			userSchema.save(callback);
+		}
+	},
+	
+	//Player Database Access
+	Player: {
+		selectByUserId: function(userId, callback) {
+			schemas.Player.findOne({_user: userId}, callback);
 		}
 	},
 	

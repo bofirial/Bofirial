@@ -4,17 +4,22 @@
 
 var types = {
 	
+	//Every Auth Types
+	everyAuthTypes: {
+		google: 1
+	},
+	
 	//Game Types
 	gameTypes: {
 		
 		ticTacToe: {value: 1, name: "Tic Tac Toe"}
+	//, euchre: {value: 2, name: "Euchre"}
 	}
 
 };
 
-if (!module)
+if (typeof global != undefined)
 {
-	var module = {};
+	global.types = types;
 }
 
-module.exports = types;
