@@ -9,7 +9,7 @@ module.exports = function(database) {
 			email: String,
 			
 			//Google Id for the User.  Must be Unique
-			id: { type: Number, unique: true },
+			id: { type: String, unique: true },
 			
 			verifiedEmail: Boolean,
 			

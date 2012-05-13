@@ -53,14 +53,9 @@ everyauth.google
 
 //Builds the User Object from the userId
 everyauth.everymodule.findUserById( function (userId, callback) {
-	  var user;
 		
 		//Selects the User from the Database
-		dal.User.selectById(userId, function (err, docs) {
-			if (docs && docs.length > 0)
-			{
-				user = docs[0];
-			}
+		dal.User.selectById(userId, types.everyAuthTypes.google, function (user) {
 			
 			callback(null, user);
 		});

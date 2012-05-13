@@ -6,14 +6,32 @@ global.dal = {
 	User: {
 		//Selects a User By it's Google Id
 		selectById: function(googleId, everyAuthType, callback) {
-		
-			schemas.User.findOne({id: googleId}, function (err, docs) {
 			
-				if (docs.length > 0)
+			//Selects OAuth Info from User Database
+			schemas.User.findOne({id: googleId}, function (err, userDoc) {
+			
+				if (userDoc)
 				{
-					//CONSIDER: Might want to update user data if its changed.
-				
-					callback.call(null, docs[0]);
+					var user = userDoc;
+					
+					//Selects Bofirial User Info from Player Database
+					schemas.Player.findOne({_user: user}, function(err, playerDoc) {
+						
+						if (playerDoc)
+						{
+							user.playerName = playerDoc.playerName;
+						}
+						else
+						{
+							user.playerName = user.firstName + user.lastName;
+						}
+						
+						callback(user);
+					});
+				}
+				else
+				{
+					callback(null);
 				}
 
 			});
@@ -21,8 +39,10 @@ global.dal = {
 		
 		//Inserts a new User
 		insert: function(user, callback) {
-			var userSchema = new schemas.User();
+			var userSchema = new schemas.User(),
+				playerSchema = new schemas.Player();
 			
+			//Stores OAUTH info in User Database
 			userSchema.firstName = 		user.firstName;
 			userSchema.lastName = 		user.lastName;
 			userSchema.fullName = 		user.fullName;
@@ -30,14 +50,14 @@ global.dal = {
 			userSchema.verifiedEmail = 	user.verifiedEmail;
 			userSchema.id = 			user.id;
 			
-			userSchema.save(callback);
-		}
-	},
-	
-	//Player Database Access
-	Player: {
-		selectByUserId: function(userId, callback) {
-			schemas.Player.findOne({_user: userId}, callback);
+			userSchema.save(function() {
+			
+				//Stores Bofirial info in Player Database
+				playerSchema.playerName = userSchema.firstName + userSchema.lastName;
+				playerSchema.user = userSchema;
+			
+				playerSchema.save(callback);
+			});
 		}
 	},
 	

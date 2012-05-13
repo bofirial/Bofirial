@@ -16,20 +16,20 @@ html
 
   body
     .headerWrapper
-      .header(data-username= (everyauth.loggedIn? everyauth.user.firstName : undefined))
+      .header(data-username= (everyauth.loggedIn? everyauth.user.playerName : undefined))
         a(href='/') 
           h1 Bofirial
         
         .userNav
           - if (everyauth.loggedIn)
-            a(href='/profile')= everyauth.user.firstName
+            a(href='/profile')= everyauth.user.playerName
             a(href='/logout') Logout
           - else
             a(href='/auth/google') Sign In        
         
         != partial('header/_globalNav');
         
-        != partial('header/_gameList');
+        -//!= partial('header/_gameList');
 
      .expandBar
        

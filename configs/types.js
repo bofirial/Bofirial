@@ -18,7 +18,7 @@ var types = {
 
 };
 
-if (typeof global != undefined)
+if (typeof global != "undefined")
 {
 	global.types = types;
 }

@@ -25,11 +25,11 @@
 	},	
 	"dependencies" :
 	{
-		"colors" : "0.5.x",
+		"colors" : "0.6.x",
 		"express" : "2.5.x",
 		"jade" : "0.20.x",
 		"mongoose" : "2.4.x",
-		"nowjs" : "0.8.x",
+		"now" : "0.8.x",
 		"everyauth" : "0.2.x",
 		"connect" : "1.8.x"
 	},
