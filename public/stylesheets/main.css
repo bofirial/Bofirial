@@ -2,7 +2,7 @@
 html,
 body {
   min-height: 100%;
-  min-width: 300px;
+  min-width: 350px;
 }
 body {
   background: #330000;
@@ -36,7 +36,10 @@ body {
   margin: auto;
   position: relative;
   font-size: 0;
-  /*
+  text-align: center;
+  /*******************************************************************************************************************
+//TODO: Open Games Section Styling for Tic Tac Toe
+
 		.openGames {
 			
 			list-style: none;
@@ -175,6 +178,7 @@ body {
 				
 			}
 		}
+******************************************************************************************************************
 */
 
 }
@@ -183,15 +187,14 @@ body {
   width: 168px;
   height: 54px;
   margin: 0;
-  display: inline-block;
+  float: left;
 }
 .headerWrapper .header .userNav {
-  position: absolute;
-  right: 0;
-  top: 5px;
+  float: right;
+  height: 44px;
   max-width: 135px;
   font-size: 12px;
-  padding: 0 20px 0 10px;
+  padding: 10px 20px 0 10px;
 }
 .headerWrapper .header .userNav a {
   margin: 5px;
@@ -199,6 +202,7 @@ body {
 }
 .headerWrapper .header .globalNav {
   list-style: none;
+  clear: both;
   margin: 10px auto;
   padding: 0;
   font-size: 12px;
@@ -223,6 +227,10 @@ body {
 }
 .headerWrapper .header .globalNav li:first-child {
   border-top: none;
+}
+.headerWrapper .header .globalNav li.current a {
+  color: #e1e1e1;
+  font-weight: bold;
 }
 .headerWrapper .header .globalNav li a {
   text-align: center;
@@ -286,15 +294,20 @@ body {
   color: #bbbbbb;
 }
 @media only screen and (min-width: 480px) {
-  
-}
-@media only screen and (min-width: 768px) {
+  .headerWrapper .header .globalNav {
+    width: auto;
+    border: none;
+    background: none;
+    box-shadow: none;
+    margin: 0 auto;
+    display: inline-block;
+  }
   .headerWrapper .header .globalNav li {
     display: inline-block;
     height: 19px;
     margin: 10px;
     padding: 8px 16px;
-    width: 100px;
+    width: 125px;
     text-align: center;
     background: #661111;
     background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #3a0a0a), color-stop(1, #661111));
@@ -315,7 +328,7 @@ body {
     margin: -8px -16px;
     padding: 8px 16px;
     text-decoration: none;
-    width: 100px;
+    width: 125px;
     color: #bbbbbb;
   }
   .headerWrapper .header .globalNav li.current {
@@ -330,6 +343,25 @@ body {
     background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #661111), color-stop(1, #921818));
     background: -ms-linear-gradient(bottom, #661111, #921818);
     background: -moz-linear-gradient(center bottom, #661111 0%, #921818 100%);
+  }
+}
+@media only screen and (min-width: 768px) {
+  
+}
+@media only screen and (min-width: 960px) {
+  .headerWrapper .header {
+    text-align: left;
+  }
+  .headerWrapper .header .globalNav {
+    padding-left: 20px;
+  }
+  .headerWrapper + .expandBar {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1300px) {
+  .headerWrapper .header {
+    max-width: 1300px;
   }
   .chatBox {
     width: 1000px;
@@ -408,13 +440,5 @@ body {
     background: -ms-linear-gradient(bottom, #666666, #4d4d4d);
     background: -moz-linear-gradient(center bottom, #666666 0%, #4d4d4d 100%);
     color: #fff;
-  }
-}
-@media only screen and (min-width: 960px) {
-  
-}
-@media only screen and (min-width: 1300px) {
-  .headerwrapper .header {
-    max-width: 1300px;
   }
 }

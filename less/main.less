@@ -28,7 +28,7 @@
 
 html, body {
 	min-height: 100%;
-	min-width: 300px;
+	min-width: 350px;
 }
 
 body {
@@ -67,6 +67,7 @@ body {
 		margin: auto;
 		position: relative;
 		font-size: 0;
+		text-align: center;
 
 		h1 {
 		
@@ -76,20 +77,19 @@ body {
 			height: 54px;
 			
 			margin: 0;
-			display: inline-block;
+			float: left;
 		}
 		
 			
 		.userNav {
-			position: absolute;
-			right: 0;
-			top: 5px;
+			float: right;
+			height: 44px;
 			
 			max-width: 135px;
 			
 			font-size: 12px;
 	
-			padding: 0 20px 0 10px;
+			padding: 10px 20px 0 10px;
 						
 			a {
 				margin: 5px;
@@ -100,6 +100,8 @@ body {
 		.globalNav {
 		
 			list-style: none;
+			
+			clear: both;
 			
 			margin: 10px auto;
 			padding: 0;
@@ -121,7 +123,14 @@ body {
 				&:first-child {
 					border-top: none;
 				}
-			
+				
+				&.current {
+					a {
+						color: lighten(@headerFontColor, 15%);
+						font-weight: bold;
+					}
+				}
+				
 				a {
 					text-align: center;
 					display: block;
@@ -153,7 +162,10 @@ body {
 			
 			border-bottom: 1px lighten(@headerColor, 15%) solid;
 		}
-/*
+		
+/*******************************************************************************************************************
+//TODO: Open Games Section Styling for Tic Tac Toe
+
 		.openGames {
 			
 			list-style: none;
@@ -292,6 +304,7 @@ body {
 				
 			}
 		}
+******************************************************************************************************************
 */
 	}
 	
@@ -348,10 +361,6 @@ body {
 
 @media only screen and (min-width: 480px) {
 
-}
-
-@media only screen and (min-width: 768px) {
-	
 	.headerWrapper {
 
 	
@@ -359,12 +368,19 @@ body {
 			
 			.globalNav {
 			
+				width: auto;
+				border: none;
+				background: none;
+				box-shadow: none;
+				margin: 0 auto;
+				display: inline-block;
+			
 				li {
 					display: inline-block;
 					height: 19px;
 					margin: 10px;
 					padding: 8px 16px;
-					width: 100px;
+					width: 125px;
 					text-align: center;
 					.gradient(@navColor, darken(@navColor, 10%), @navColor);
 					.rounded(10px);
@@ -375,7 +391,7 @@ body {
 						margin: -8px -16px;
 						padding: 8px 16px;
 						text-decoration: none;
-						width: 100px;
+						width: 125px;
 						color: @headerFontColor;
 					}
 				}
@@ -392,6 +408,36 @@ body {
 
 
 		}
+	}
+
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+
+@media only screen and (min-width: 960px) {
+	
+	.headerWrapper {
+		.header {
+		
+			text-align: left;
+			
+			.globalNav {
+				padding-left: 20px;
+			}
+		}
+		
+		+ .expandBar {
+			display: none;
+		}	
+	}
+}
+
+@media only screen and (min-width: 1300px) {
+	.headerWrapper .header {
+		
+		max-width: 1300px;
 	}
 	
 	.chatBox {
@@ -463,18 +509,6 @@ body {
 				.gradient(@chatBoxColor, darken(@chatBoxColor, 20%), darken(@chatBoxColor, 30%));
 				color: #fff;
 			}
-		
 		}
-	}
-}
-
-@media only screen and (min-width: 960px) {
-
-}
-
-@media only screen and (min-width: 1300px) {
-	.headerwrapper .header {
-		
-		max-width: 1300px;
 	}
 }
